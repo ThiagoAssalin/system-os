@@ -4,6 +4,7 @@ import { Modal,Button } from "@nextui-org/react";
 import OsList from "./components/osList";
 
 
+
 export default function Home() {
 
   const [visible, setVisible] = useState(false);
@@ -29,14 +30,11 @@ export default function Home() {
         open={visible}
         onClose={closeHandler}
       >
-        
         <Modal.Body>
           <div className="flex flex-col justify-center items-center">
             <input type="text" placeholder="Nome do Solicitante" className="border-2 w-4/5 rounded-xl px-2 mb-1"></input>
             <textarea  className="border-2 h-24 resize-none w-4/5 rounded-xl px-2" placeholder="Descrição do problema"></textarea>
           </div>
-          
-          
         </Modal.Body>
         <Modal.Footer>
           <Button auto flat color="error" onPress={closeHandler}>
