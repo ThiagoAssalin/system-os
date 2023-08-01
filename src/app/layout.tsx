@@ -1,5 +1,8 @@
+'use client'
+
 import './globals.css'
 import Header from './components/header'
+import {SessionProvider} from "next-auth/react"
 
 
 
@@ -10,14 +13,18 @@ export const metadata = {
 
 export default function RootLayout({
   children,
+  ...props
 }: {
   children: React.ReactNode
 }) {
+  console.log('layout',{props})
   return (    
     <html lang="en">
       <body>
-        {children}
-        <Header/>
+        <SessionProvider session={props.session}>
+          {children}
+          <Header/>
+        </SessionProvider>
       </body>
     </html>
   )
