@@ -1,42 +1,42 @@
+'use client'
+import { signIn } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
+import {SyntheticEvent, useState} from 'react'
 
-import api from "@/services/axiosClient"
-import{useState, ChangeEvent} from 'react'
 
-export default function LoginContainer(){
+export default  function LoginContainer(){
 
-    const [formData, setFormData] = useState({
-        username: '',
-        password: ''
-    })
-    
-    const handleForm = (e:ChangeEvent<HTMLInputElement>, name:string) =>{
-        setFormData(
-            {...formData,
-                [name]:e.target.value}
-            
-        )
-    }
-    const login = async  (event)=> {
-        
-        try{
-            event.preventDefalt()
-            const result = await api.post('/auth/login')
+    const [username, setUsername] = useState<String>('')
+    const [password, setPassword] = useState<String>('')
+
+    const router = useRouter()
+
+
+
+    async function handleSubmit(event: SyntheticEvent) {
+        event.preventDefault()
+
+        const result = await signIn('credentials',{
+            username, 
+            password,
+            redirect: false
+        })
+
+        if(result?.error){
             console.log(result)
-        }catch(err){
-
+            return
         }
-        
-        
-        
+
+        router.replace('/')
     }
 
     return(
         <div>
-            <div   className="flex flex-col justify-center items-center gap-9 rounded-md w-60 h-72 bg-gradient-to-r from-cyan-500 to-blue-500" >
-                <input type="text" placeholder="Login" required value={formData.username} className="border border-sky-500 rounded-md p-1" onChange={(e)=>{handleForm(e,'username')}} ></input>
-                <input type="password" placeholder="Password" required value={formData.password} className="border border-sky-500 rounded-md p-1" onChange={(e)=>{handleForm(e,'password')}}></input>
-                <button  className="border rounded-md text-white bg-cyan-700 p-1" onClick={login}>Enviar</button>
-            </div>      
+            <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center gap-9 rounded-md w-60 h-72 bg-gradient-to-r from-cyan-500 to-blue-500" >
+                <input type="text" placeholder="Username" required onChange={(e)=>{setUsername(e.target.value)}} className="border border-sky-500 rounded-md p-1"  ></input>
+                <input type="password" placeholder="Password" required onChange={(e)=>{setPassword(e.target.value)}}  className="border border-sky-500 rounded-md p-1" ></input>
+                <button type='submit' className="border rounded-md text-white bg-cyan-700 p-1" >Enviar</button>
+            </form>      
         </div>
     )
 }

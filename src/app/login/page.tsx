@@ -1,9 +1,6 @@
 'use client'
 import LoginContainer from "../components/containerLogin";
 
-
-
-
 export default function Login(){
 
    

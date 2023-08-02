@@ -1,9 +1,6 @@
-'use client'
-
 import './globals.css'
 import Header from './components/header'
-import {SessionProvider} from "next-auth/react"
-
+import NextAuthSessionProvider from '@/providers/sessionProvider'
 
 
 export const metadata = {
@@ -12,19 +9,18 @@ export const metadata = {
 }
 
 export default function RootLayout({
-  children,
-  ...props
+  children, 
 }: {
   children: React.ReactNode
 }) {
-  console.log('layout',{props})
+  
   return (    
     <html lang="en">
       <body>
-        <SessionProvider session={props.session}>
-          {children}
-          <Header/>
-        </SessionProvider>
+          <NextAuthSessionProvider>
+            {children}
+            <Header/>
+          </NextAuthSessionProvider>
       </body>
     </html>
   )
