@@ -1,6 +1,6 @@
 import './globals.css'
 import Header from './components/header'
-import NextAuthSessionProvider from '@/providers/sessionProvider'
+
 
 
 export const metadata = {
@@ -17,10 +17,8 @@ export default function RootLayout({
   return (    
     <html lang="en">
       <body>
-          <NextAuthSessionProvider>
             {children}
             <Header/>
-          </NextAuthSessionProvider>
       </body>
     </html>
   )
