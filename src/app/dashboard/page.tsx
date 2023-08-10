@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Modal,Button } from "@nextui-org/react";
 import OsList from "../components/osList";
+import PrivateRoutes from "../components/privateRoutes";
 
 
 
@@ -17,6 +18,7 @@ export default function Dashboard() {
 
 
   return (
+    <PrivateRoutes>
     <main className="flex justify-center items-center h-screen w-screen">
       <div className="fixed bottom-0 right-0 m-3">
         <Button auto shadow onPress={handler} >
@@ -46,5 +48,6 @@ export default function Dashboard() {
         </Modal.Footer>
       </Modal>
     </main>
+    </PrivateRoutes>
   )
 }

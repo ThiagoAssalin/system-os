@@ -1,5 +1,6 @@
 import './globals.css'
 import Header from './components/header'
+import { AuthProvider } from '@/services/authContext'
 
 
 
@@ -17,8 +18,10 @@ export default function RootLayout({
   return (    
     <html lang="en">
       <body>
+        <AuthProvider>
             {children}
             <Header/>
+        </AuthProvider>
       </body>
     </html>
   )

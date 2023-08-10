@@ -7,9 +7,12 @@ import { useRouter } from 'next/navigation'
 
 import Login from '@/services/auth'
 import { loginUser } from '@/validators/userValidator'
+import { useAuth } from '@/services/authContext'
+
 
 
 export default  function LoginContainer(){
+    const {login} = useAuth()
     const router = useRouter()
     const {register, handleSubmit, formState:{errors}} = useForm({
         resolver:yupResolver(loginUser)
@@ -22,6 +25,7 @@ export default  function LoginContainer(){
 
             console.log(result)
             localStorage.setItem("token", result.data.logged.token)
+            login()
             router.push('/dashboard')
             
         }
