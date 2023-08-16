@@ -1,4 +1,4 @@
-import api from "./axiosClient";
+import api from "../axiosClient";
 
 interface CustonError{
     response?:{

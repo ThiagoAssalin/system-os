@@ -1,15 +1,15 @@
 "use client"
 import { useState } from "react";
-import { Modal,Button } from "@nextui-org/react";
 import OsList from "../components/osList";
 import PrivateRoutes from "../components/privateRoutes";
+import Modal from "../components/modal";
+import { boolean } from "yup";
 
 
 
 export default function Dashboard() {
 
   const [visible, setVisible] = useState(false);
-  const handler = () => setVisible(true);
 
   const closeHandler = () => {
     setVisible(false);
@@ -21,32 +21,10 @@ export default function Dashboard() {
     <PrivateRoutes>
     <main className="flex justify-center items-center h-screen w-screen">
       <div className="fixed bottom-0 right-0 m-3">
-        <Button auto shadow onPress={handler} >
-        Criar OS
-        </Button>
+        <button className="border rounded-md text-white bg-cyan-500 p-1" onClick={()=>setVisible(true)}>Criar OS</button>
       </div>
+      <Modal visible={visible} closeHandler={closeHandler}></Modal>
       <OsList/>
-      <Modal
-        closeButton
-        aria-labelledby="modal-title"
-        open={visible}
-        onClose={closeHandler}
-      >
-        <Modal.Body>
-          <div className="flex flex-col justify-center items-center">
-            <input type="text" placeholder="Nome do Solicitante" className="border-2 w-4/5 rounded-xl px-2 mb-1"></input>
-            <textarea  className="border-2 h-24 resize-none w-4/5 rounded-xl px-2" placeholder="Descrição do problema"></textarea>
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button auto flat color="error" onPress={closeHandler}>
-            Fechar
-          </Button>
-          <Button auto onPress={closeHandler}>
-            Enviar
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </main>
     </PrivateRoutes>
   )
