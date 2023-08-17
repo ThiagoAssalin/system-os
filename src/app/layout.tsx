@@ -1,6 +1,7 @@
 import './globals.css'
 import Header from './components/header'
 import { AuthProvider } from '@/services/authContext'
+import {OtherProvider} from '@/services/otherContext'
 
 
 
@@ -19,8 +20,10 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <AuthProvider>
+          <OtherProvider>
             {children}
             <Header/>
+          </OtherProvider>
         </AuthProvider>
       </body>
     </html>
