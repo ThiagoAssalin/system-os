@@ -13,7 +13,7 @@ const PaginationComponent:React.FC<PaginationProps> = ({pages, currentPage,items
     }
 
     return(
-        <div className="flex gap-3 justify-center mt-4">
+        <div className="flex gap-3 justify-center mb-4">
 			<button 
 				onClick={(e) => goToPage(0)}
 				disabled={currentPage == 0}
