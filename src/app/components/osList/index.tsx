@@ -2,9 +2,24 @@
 import { useEffect, useState } from "react";
 import CardOs from "../cardOs";
 import { GetOs } from "@/services/os";
+import PaginationComponent from "../pagination";
+
+interface OsProps{
+    id:number,
+    requester:string,
+    finished:boolean
+}
+
 
 export default function OsList(){
-    const[osList , setOsList] = useState([])
+    const[osList , setOsList] = useState<OsProps[]>([])
+    const[itemsPerPage, setItemsPerPage] = useState(5)
+    const[currentPage, setCurrentPage] = useState(0)
+
+    const pages = Math.ceil(osList.length / itemsPerPage)
+    const startIndex = currentPage * itemsPerPage
+    const endIndex = startIndex + itemsPerPage
+    const currentItems = osList.slice(startIndex, endIndex)
     
     
     useEffect(()=>{
@@ -21,8 +36,9 @@ export default function OsList(){
 
     return(
 
-        <div className="  w-4/5  mt-5 flex flex-col gap-2 p-2">
-            {osList && (osList.map((os)=>(
+        <div className="w-4/5 mt-5 flex flex-col gap-2 p-2">
+            <PaginationComponent pages={pages} currentPage={currentPage} itemsPerPage={itemsPerPage} setCurrentPage={setCurrentPage}/>
+            {osList && (currentItems.map((os)=>(
                 <>
                     <CardOs 
                         id={os.id}
@@ -34,6 +50,7 @@ export default function OsList(){
             )
 
             ))}
+            
         </div>
     )
 }
