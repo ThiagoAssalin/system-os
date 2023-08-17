@@ -18,3 +18,17 @@ export const CreateOs = async (token:string, requester:string, problemDescriptio
     }
 }
 
+export const GetOs= async (token:string)=>{
+    try{
+        const response = api.get("/service-order",{
+            headers:{
+                Authorization: `Bearer ${token}`
+            }
+        })
+        
+        return (await response).data.serviceOrders
+    }catch(err){
+        console.log(err)
+    }
+}
+

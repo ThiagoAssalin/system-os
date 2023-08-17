@@ -19,7 +19,7 @@ const AuthContext = createContext<AuthContextProps>({
 });
 
 export const AuthProvider = ({children}:childrenProps) => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false)
+    const [isAuthenticated, setIsAuthenticated] = useState(true)
 
     const login = ()=>{
         setIsAuthenticated(true)
