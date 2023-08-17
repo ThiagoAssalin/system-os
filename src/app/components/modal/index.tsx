@@ -3,6 +3,7 @@ import {yupResolver} from '@hookform/resolvers/yup'
 
 import { createOsValidator } from '@/validators/osValidator'
 import { CreateOs } from '@/services/os'
+import { useOther } from '@/services/otherContext'
 
 interface ModalProps {
     visible: boolean;
@@ -11,6 +12,8 @@ interface ModalProps {
 
 
 export default function Modal({visible, closeHandler}:ModalProps){
+
+    const {changeUpdate} = useOther()
 
     const {register, handleSubmit, formState:{errors}} = useForm({
         resolver:yupResolver(createOsValidator)
@@ -22,6 +25,7 @@ export default function Modal({visible, closeHandler}:ModalProps){
             const response =  await CreateOs(token, requester, problemDescription)
             console.log(token)
             console.log(response)
+            changeUpdate()
             closeHandler()
         }
     }

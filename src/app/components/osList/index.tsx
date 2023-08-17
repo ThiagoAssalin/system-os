@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import CardOs from "../cardOs";
 import { GetOs } from "@/services/os";
 import PaginationComponent from "../pagination";
+import { useOther } from "@/services/otherContext";
 
 interface OsProps{
     id:number,
@@ -15,6 +16,7 @@ export default function OsList(){
     const[osList , setOsList] = useState<OsProps[]>([])
     const[itemsPerPage, setItemsPerPage] = useState(5)
     const[currentPage, setCurrentPage] = useState(0)
+    const {updatePage} = useOther()
 
     const pages = Math.ceil(osList.length / itemsPerPage)
     const startIndex = currentPage * itemsPerPage
@@ -32,7 +34,7 @@ export default function OsList(){
             } 
         }
         getOss()
-    },[])
+    },[updatePage])
 
     return(
 
