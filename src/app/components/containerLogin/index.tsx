@@ -20,14 +20,13 @@ export default  function LoginContainer(){
     
     const onSubmit = async ({username, password}:{username:string, password:string}) => {
         const result = await Login(username, password)
+        console.log(result?.data.token)
         
         if(result){
-
-            console.log(result)
-            localStorage.setItem("token", result.data.logged.token)
+            
+            localStorage.setItem("token", result.data.token)
             login()
             router.push('/dashboard')
-            
         }
     }
 
