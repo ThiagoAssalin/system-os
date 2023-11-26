@@ -23,8 +23,6 @@ export default function Modal({visible, closeHandler}:ModalProps){
         const token = localStorage.getItem("token")
         if(token){
             const response =  await CreateOs(token, requester, problemDescription)
-            console.log(token)
-            console.log(response)
             changeUpdate()
             closeHandler()
         }

@@ -8,11 +8,17 @@ import { useRouter } from 'next/navigation'
 import Login from '@/services/auth'
 import { loginUser } from '@/validators/userValidator'
 import { useAuth } from '@/services/authContext'
+import { useUser } from '@/services/userContext'
+
+
 
 
 
 export default  function LoginContainer(){
     const {login} = useAuth()
+    const {saveId} = useUser()
+    const {idUser} = useUser()
+    
     const router = useRouter()
     const {register, handleSubmit, formState:{errors}} = useForm({
         resolver:yupResolver(loginUser)
@@ -20,11 +26,9 @@ export default  function LoginContainer(){
     
     const onSubmit = async ({username, password}:{username:string, password:string}) => {
         const result = await Login(username, password)
-        console.log(result?.data.token)
-        
         if(result){
-            
-            localStorage.setItem("token", result.data.token)
+            localStorage.setItem("token", result.data.data.token)
+            saveId(result.data.data.user.id)
             login()
             router.push('/dashboard')
         }

@@ -18,10 +18,11 @@ export default function OsList(){
     const[currentPage, setCurrentPage] = useState(0)
     const {updatePage} = useOther()
 
-    const pages = Math.ceil(osList.length / itemsPerPage)
+    
+    const pages = Math.ceil((osList && osList.length) ? osList.length / itemsPerPage : 0);
     const startIndex = currentPage * itemsPerPage
     const endIndex = startIndex + itemsPerPage
-    const currentItems = osList.slice(startIndex, endIndex)
+    const currentItems = osList ? osList.slice(startIndex, endIndex) : [];
     
     
     useEffect(()=>{

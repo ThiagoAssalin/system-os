@@ -2,6 +2,7 @@ import './globals.css'
 import Header from './components/header'
 import { AuthProvider } from '@/services/authContext'
 import {OtherProvider} from '@/services/otherContext'
+import {UserProvider} from '@/services/userContext'
 
 
 
@@ -21,8 +22,10 @@ export default function RootLayout({
       <body>
         <AuthProvider>
           <OtherProvider>
-            {children}
-            <Header/>
+            <UserProvider>
+              {children}
+              <Header/>
+            </UserProvider>
           </OtherProvider>
         </AuthProvider>
       </body>

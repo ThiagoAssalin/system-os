@@ -1,7 +1,7 @@
 import api from "../axiosClient";
 
 
-export const GetUser= async (token:string , id:number)=>{
+export const GetUser= async (token:string , id:string)=>{
     try{
         const response = api.get(`/user/search/${id}`,{
             headers:{
