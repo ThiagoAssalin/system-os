@@ -2,6 +2,8 @@
 
 import React, {ReactNode, createContext, useContext, useEffect, useState} from 'react'
 
+
+
 interface AuthContextProps{
     isAuthenticated: boolean,
     login:()=>void,
@@ -20,6 +22,7 @@ const AuthContext = createContext<AuthContextProps>({
 
 export const AuthProvider = ({children}:childrenProps) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
+    
     useEffect(()=>{
         const token = localStorage.getItem("token")
         if(token){
@@ -32,7 +35,11 @@ export const AuthProvider = ({children}:childrenProps) => {
     }
     const logout = ()=>{
         setIsAuthenticated(false)
+        localStorage.clear()
+        
     }
+
+  
     return(
         <AuthContext.Provider value={{isAuthenticated, login, logout}}>
             {children}
