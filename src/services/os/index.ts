@@ -1,4 +1,4 @@
-import { AxiosError } from "axios";
+
 import api from "../axiosClient";
 
 
@@ -27,6 +27,19 @@ export const GetOs= async (token:string)=>{
         })
         
         return (await response).data.serviceOrders
+    }catch(err){
+        console.log(err)
+    }
+}
+
+export const DeleteOs =async (token:string, id :number) => {
+    try{
+        const response = await api.delete(`/service-order/delete/${id}`,{
+            headers:{
+                Authorization: `Bearer ${token}`
+            }
+        })
+        return response
     }catch(err){
         console.log(err)
     }
